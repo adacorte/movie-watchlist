@@ -6,24 +6,16 @@ export default function App() {
     const [search, setSearch] = React.useState('')
     const [data, setData] = React.useState([])
     const [watchList, setWatchList] = React.useState([])
-    const [fetchTryCount, setTryCount] = React.useState(0)
+    const [fetchTryCount, setFetchTryCount] = React.useState(0)
     const [fetchStatus, setFetchStatus] = React.useState(true)
-    // const [defaultText, setDefaultText] = React.useState(
-    //   <div className="movie-icon-div">
-    //     <img src="./movie-icon.png" alt="movie icon" className="movie-icon" />
-    //     Start exploring
-    //   </div>
-    // )
 
     function handleChange(event) {
         setSearch(event.target.value)
     }
 
-    console.log(data)
-
     React.useEffect(() => {
         if (data.length > 0 || !fetchStatus) {
-            setTryCount(fetchTryCount + 1)
+            setFetchTryCount(fetchTryCount + 1)
         }
     }, [data, fetchStatus])
 
@@ -33,7 +25,6 @@ export default function App() {
             `http://www.omdbapi.com/?apikey=4884bc5&s=${search}`
         )
         const data = await result.json()
-        console.log(data)
 
         setFetchStatus(data.Response === 'True')
         if (data.Response === 'False') {
@@ -49,8 +40,6 @@ export default function App() {
         })
         setData(await Promise.all(movieArrayWithData))
     }
-
-    console.log(fetchTryCount)
 
     function toggle(imdbID) {
         return setWatchList((prevWatchListArray) => {
