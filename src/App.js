@@ -77,6 +77,7 @@ React.useEffect(() => {
       imdbID={movie.imdbID}
       toggle={() => toggle(movie.imdbID)}
     />)
+    console.log("ASDF")
 
   return (
     <div>

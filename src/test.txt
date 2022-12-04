@@ -1,0 +1,13 @@
+remote repo (Github)
+
+^ push - pull
+
+local repo
+
+^ commit
+
+staging area
+
+^ add
+
+working tree
