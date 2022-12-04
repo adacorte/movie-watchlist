@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 import Movie from './components/Movie.js'
 
@@ -17,7 +17,7 @@ export default function App() {
         if (data.length > 0 || !fetchStatus) {
             setFetchTryCount(fetchTryCount + 1)
         }
-    }, [data, fetchStatus])
+    }, [data, fetchStatus, fetchTryCount])
 
     async function handleSubmit(event) {
         event.preventDefault()
