@@ -22,7 +22,7 @@ export default function App() {
     async function handleSubmit(event) {
         event.preventDefault()
         const result = await fetch(
-            `http://www.omdbapi.com/?apikey=4884bc5&s=${search}`
+            `https://www.omdbapi.com/?apikey=4884bc5&s=${search}`
         )
         const data = await result.json()
 
@@ -33,7 +33,7 @@ export default function App() {
 
         const movieArrayWithData = data.Search.map((movie) => {
             return fetch(
-                `http://www.omdbapi.com/?apikey=4884bc5&i=${movie.imdbID}`
+                `https://www.omdbapi.com/?apikey=4884bc5&i=${movie.imdbID}`
             )
                 .then((res) => res.json())
                 .then((details) => ({ ...movie, movieInfo: details }))
