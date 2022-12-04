@@ -6,7 +6,7 @@ export default function App() {
     const [search, setSearch] = React.useState('')
     const [data, setData] = React.useState([])
     const [watchList, setWatchList] = React.useState([])
-    const [fetchTryCount, setFetchTryCount] = React.useState(0)
+    const [fetchTryCount, setFetchTryCount] = React.useState(false)
     const [fetchStatus, setFetchStatus] = React.useState(true)
 
     function handleChange(event) {
@@ -15,9 +15,10 @@ export default function App() {
 
     React.useEffect(() => {
         if (data.length > 0 || !fetchStatus) {
-            setFetchTryCount(fetchTryCount + 1)
+            setFetchTryCount(true)
         }
-    }, [data, fetchStatus, fetchTryCount])
+    }, [data, fetchStatus])
+    // }, [data, fetchStatus])
 
     async function handleSubmit(event) {
         event.preventDefault()
@@ -92,7 +93,7 @@ export default function App() {
                 </form>
             </div>
             <div className="movie-feed">
-                {fetchTryCount > 0 ? (
+                {fetchTryCount ? (
                     data.length > 0 ? (
                         <div>{feed}</div>
                     ) : (
