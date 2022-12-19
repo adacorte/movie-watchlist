@@ -42,19 +42,6 @@ export default function App() {
         setData(await Promise.all(movieArrayWithData))
     }
 
-    async function handleWatchlist(event) {
-        event.preventDefault()
-
-        const movieArrayWithData = data.Search.map((movie) => {
-            return fetch(
-                `https://www.omdbapi.com/?apikey=4884bc5&i=${movie.imdbID}`
-            )
-                .then((res) => res.json())
-                .then((details) => ({ ...movie, movieInfo: details }))
-        })
-        setData(await Promise.all(movieArrayWithData))
-    }
-
     function toggle(imdbID) {
         return setWatchList((prevWatchListArray) => {
             const idx = prevWatchListArray.indexOf(imdbID)
