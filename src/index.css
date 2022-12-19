@@ -134,6 +134,14 @@ button {
   color: #DFDDDD;
 }
 
+.no-data-div {
+  max-width: 341px;
+  align-self: center;
+  text-align: center;
+  font-weight: 700;
+  color: #DFDDDD;
+}
+
 .card-container {
   display: flex;
   flex-direction: row;

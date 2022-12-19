@@ -18,7 +18,6 @@ export default function App() {
             setFetchTryCount(true)
         }
     }, [data, fetchStatus])
-    // }, [data, fetchStatus])
 
     async function handleSubmit(event) {
         event.preventDefault()
@@ -28,9 +27,23 @@ export default function App() {
         const data = await result.json()
 
         setFetchStatus(data.Response === 'True')
+
         if (data.Response === 'False') {
             return setData([])
         }
+
+        const movieArrayWithData = data.Search.map((movie) => {
+            return fetch(
+                `https://www.omdbapi.com/?apikey=4884bc5&i=${movie.imdbID}`
+            )
+                .then((res) => res.json())
+                .then((details) => ({ ...movie, movieInfo: details }))
+        })
+        setData(await Promise.all(movieArrayWithData))
+    }
+
+    async function handleWatchlist(event) {
+        event.preventDefault()
 
         const movieArrayWithData = data.Search.map((movie) => {
             return fetch(
@@ -81,7 +94,6 @@ export default function App() {
             />
             <div className="header-container">
                 <div className="header-text-left">Find your film</div>
-                <div className="header-text-right">My watchlist</div>
             </div>
             <div className="form-container">
                 <form onSubmit={handleSubmit}>
@@ -97,7 +109,10 @@ export default function App() {
                     data.length > 0 ? (
                         <div>{feed}</div>
                     ) : (
-                        <div>No data</div>
+                        <div className="no-data-div">
+                            Unable to find what you’re looking for. Please try
+                            another search.
+                        </div>
                     )
                 ) : (
                     <div className="movie-icon-div">
